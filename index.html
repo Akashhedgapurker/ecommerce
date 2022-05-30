@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body{
+        font-size: 16px;
+        background-color: rgb(150, 209, 233);
+      }
+
+      div{
+        width: 60%;
+        background-color: rgb(129, 222, 250);
+        text-align: center;
+        margin-left: 20%;
+        justify-content: center;
+        }
+      input, select{
+        box-shadow: rgba(9, 230, 83, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        width: 300px;
+        height: 40px;
+        display: block;
+        justify-items: center;
+        margin: auto;
+        margin-top: 20px;
+      }
+
+      #navbar{
+        display: flex;
+        justify-content: space-evenly;
+
+      }
+    </style>
+  </head>
+
+  <body>
+
+    </div>
+    <div>
+      <div id="navbar">
+      <p id="nav"><a href="./products.html">Show Products</a></p>
+      <p id="nav"><a href="./index.html">Add products</a></p>
+    </div>
+      <h2>Add Products</h2>
+      <form id="products" onsubmit="addItems(event)" >
+      <!--Create a form here to accept product data from user, give form HTML id as "products"-->
+
+      <!--Create four inputs to accept Type, Description, price, & image-->
+      <!--give the inputs following respective id's, "type", "desc", "price","image"-->
+      <!--create a "Add Product" button to submit form, give it html id as "add_product"-->
+        <input id="name" type="text" placeholder="Product name">
+        <input id="category" type="text" placeholder="Category">
+        <input id="image" type="url" placeholder="Image URL">
+        <input id="price" type="number" placeholder="Price">
+        <select  id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Unisex">Unisex</option>
+        <input id="sold" type="number" placeholder="Enter 0 for sold, 1 for not sold">
+        </select>
+        <input type="submit" id="add" >
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+    function Products(n, c, i, p, g, s){
+    this.name=n;
+    this.category=c;
+    this.image=i;
+    this.price=p;
+    this.gender=g;
+    this.sold=s;
+}
+
+let productsarr=JSON.parse(localStorage.getItem("products")) || [];
+function addItems(e){
+    e.preventDefault();
+    
+    
+    let form=document.getElementById("products");
+    let name=form.name.value;
+    let category=form.category.value;
+    let image=form.image.value;
+    let price=form.price.value;
+    let gender=form.gender.value;
+    let sold=form.sold.value;
+    let p1= new Products(name, category, image, price, gender, sold)
+
+    let data=JSON.parse(localStorage.getItem("products")) || []
+
+    data.push(p1);
+
+    localStorage.setItem("products", JSON.stringify(data));
+
+    window.location.reload();
+
+}
+</script>
